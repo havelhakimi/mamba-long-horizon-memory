@@ -1,8 +1,6 @@
 # Long-Horizon State Tracking with Mamba-1
 
-**HackerRank Deep Learning Research Engineer take-home assignment**
-
-This project investigates whether a compact selective state-space model can preserve, overwrite, and retrieve key-value information as event sequences become longer and contain more distracting updates. We reproduce a Mamba-1 baseline and evaluate a focused change to its state-decay mechanism.
+This project investigates long-horizon key-value tracking using Mamba-1. We reproduce the original baseline and introduce a learned retention gate to improve state preservation, evaluating its effectiveness through controlled ablations and failure-mode analysis.
 
 ## Task
 
@@ -54,8 +52,8 @@ See `research_report.pdf` and the notebook for error bars, detailed ablations, g
 | File | Purpose |
 |---|---|
 | `HackerRank_Full_Notebook.ipynb` | End-to-end Colab workflow, experiments, checks, plots, and findings |
-| `research_report.pdf` | Six-page research report |
-| `generate_dataset.py` | HackerRank-provided synthetic data generator |
+| `research_report.pdf` | research report |
+| `generate_dataset.py` | Provided synthetic data generator |
 | `model_retention.py` | Retention-gated Mamba-1 modification |
 | `requirements.txt` | Python dependencies |
 
@@ -75,7 +73,7 @@ For a local environment, the dependencies listed in `requirements.txt` can be in
 python -m pip install -r requirements.txt
 ```
 
-**CPU note:** The individual baseline and retention training scripts support `--device cpu`, but the notebook's full multi-seed resource-measurement cell explicitly requires CUDA. For a reduced CPU fallback experiment, use `d_model=16` and `d_state=4` consistently in both models and skip the GPU-only resource cell; label any such results as a fallback, not as reproductions of the reported GPU configuration.
+**CPU note:** The baseline and retention training scripts support CPU execution using `--device cpu`. The multi-seed experiment cell currently requires CUDA for GPU resource measurements. To run it on CPU, remove the CUDA assertion, change the device to CPU, and skip CUDA-specific memory measurements. The original model configuration can be retained, although execution will be slower.
 
 ## Attribution
 
